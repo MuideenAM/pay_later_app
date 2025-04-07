@@ -5,184 +5,318 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pay Later Everywhere',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        inputDecorationTheme: const InputDecorationTheme(
-          border: InputBorder.none,
-        ),
-      ),
       home: const HomeScreen(),
     );
   }
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
-  Widget _buildAppBar(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       backgroundColor: Colors.white,
-      elevation: 2,
-      titleSpacing: 0,
-      title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          children: [
-            // Left: "Pay later" and "everywhere" with icon
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Pay later',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.black,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 2,
+        titleSpacing: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Pay later',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
+                    Row(
+                      children: [
+                        const Text(
+                          'everywhere',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Container(
+                          width: 24,
+                          height: 24,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.error_outline,
+                            color: Colors.blue,
+                            size: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
                   Row(
-                    children: [
-                      const Text(
-                        'everywhere',
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text(
+                        'Shopping line:',
+                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '₦0',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      Container(
-                        width: 24,
-                        height: 24,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.error_outline,
-                          color: Colors.blue,
-                          size: 18,
+                          fontSize: 16,
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 6),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      textStyle: const TextStyle(fontSize: 12),
+                    ),
+                    child: const Text('Activate Credit'),
+                  ),
                 ],
               ),
-            ),
-
-            // Right: Shopping line and Activate Credit button
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            ],
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Text(
-                      'Shopping line:',
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                Expanded(
+                  child: Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    SizedBox(width: 4),
-                    Text(
-                      '₦0',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black,
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: const [
+                        Icon(Icons.search, color: Colors.grey),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Search for products or stores',
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    textStyle: const TextStyle(fontSize: 12),
                   ),
-                  child: const Text('Activate Credit'),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  height: 48,
+                  width: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  child: const Icon(
+                    Icons.center_focus_weak,
+                    color: Colors.black54,
+                  ),
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Search bar section
-  Widget _buildSearchSection(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      child: Row(
-        children: [
-          // Search box
-          Expanded(
-            child: Container(
-              height: 48,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(30),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: const [
-                  Icon(Icons.search, color: Colors.grey),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search for products or stores',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
-          const SizedBox(width: 8),
-          // Square icon button
-          Container(
-            height: 48,
-            width: 48,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
+          const SizedBox(height: 16),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        productCard(
+                          'Nokia G20 Phone',
+                          'Pay 40%',
+                          '₦39,780',
+                          '₦88,000',
+                        ),
+                        const SizedBox(width: 12),
+                        productCard(
+                          'iPhone XS Max',
+                          'Charger\nAgabassey',
+                          '₦285,000',
+                          '₦310,000',
+                        ),
+                        const SizedBox(width: 12),
+                        productCard(
+                          'Redmi Note 12',
+                          'Earbuds',
+                          '₦120,000',
+                          '₦150,000',
+                        ),
+                        const SizedBox(width: 12),
+                        productCard(
+                          'Samsung Watch',
+                          'Bluetooth',
+                          '₦95,000',
+                          '₦105,000',
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        productCard(
+                          'Anker Soundcore',
+                          'okayfones',
+                          '₦39,780',
+                          '₦88,000',
+                        ),
+                        const SizedBox(width: 12),
+                        productCard(
+                          'iPhone 12 Pro',
+                          'iMate  Store',
+                          '₦490,500',
+                          '₦515,000',
+                        ),
+                        const SizedBox(width: 12),
+                        productCard(
+                          'Pixel 6a',
+                          'Case Cover',
+                          '₦210,000',
+                          '₦250,000',
+                        ),
+                        const SizedBox(width: 12),
+                        productCard(
+                          'OPPO Reno 8',
+                          'Earbuds',
+                          '₦205,000',
+                          '₦230,000',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-            padding: const EdgeInsets.all(8),
-            child: const Icon(Icons.center_focus_weak, color: Colors.black54),
           ),
         ],
       ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: _buildAppBar(context),
+  Widget productCard(String name, String gift, String price, String oldPrice) {
+    return SizedBox(
+      width: 140,
+      height: 200,
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: 120,
+                  alignment: Alignment.center,
+                  child: const Icon(Icons.image, size: 60, color: Colors.grey),
+                ),
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.card_giftcard,
+                      size: 16,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Text(
+                name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    oldPrice,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      decoration: TextDecoration.lineThrough,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      body: _buildSearchSection(context), // << now the main content
     );
   }
 }
