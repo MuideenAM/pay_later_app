@@ -12,7 +12,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pay Later Everywhere',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          border: InputBorder.none,
+        ),
+      ),
       home: const HomeScreen(),
     );
   }
@@ -21,7 +26,6 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  // Build the custom AppBar
   Widget _buildAppBar(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
@@ -32,10 +36,9 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
           children: [
-            // Center: "Pay later" and "everywhere + icon" in two lines.
+            // Left: "Pay later" and "everywhere" with icon
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
@@ -76,7 +79,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Right: Shopping line and button
+            // Right: Shopping line and Activate Credit button
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -100,20 +103,16 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 ElevatedButton(
-                  onPressed: () {
-                    // Add your activation logic
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
-                      vertical: 10, // More vertical padding
+                      vertical: 10,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ), // Smaller corner radius
+                      borderRadius: BorderRadius.circular(6),
                     ),
                     textStyle: const TextStyle(fontSize: 12),
                   ),
@@ -127,6 +126,55 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  // Search bar section
+  Widget _buildSearchSection(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      child: Row(
+        children: [
+          // Search box
+          Expanded(
+            child: Container(
+              height: 48,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(30),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: const [
+                  Icon(Icons.search, color: Colors.grey),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search for products or stores',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          // Square icon button
+          Container(
+            height: 48,
+            width: 48,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: const Icon(Icons.center_focus_weak, color: Colors.black54),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,7 +182,7 @@ class HomeScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(60),
         child: _buildAppBar(context),
       ),
-      body: const Center(child: Text("Body content here")),
+      body: _buildSearchSection(context), // << now the main content
     );
   }
 }
